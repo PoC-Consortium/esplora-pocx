@@ -2,7 +2,7 @@ import Snabbdom from 'snabbdom-pragma'
 import layout from './layout'
 import { txBox } from './tx'
 import { updateQuery } from '../util'
-import { formatTime, formatHex, formatNumber } from './util'
+import { formatTime, formatHex, formatNumber, linkToAddr } from './util'
 import { blockTxsPerPage as perPage } from '../const'
 import loader from '../components/loading'
 
@@ -76,6 +76,18 @@ export default ({ t, block: b, blockStatus: status, blockTxs, openTx, spends, op
           <div>{`${formatNumber(b.weight/1000)} KWU`}</div>
         </div>
 
+        { /* PoCX fields - always visible */ }
+        { b.account_address && [
+            <div>
+              <div>{t`Miner`}</div>
+              <div className="mono">{linkToAddr(b.account_address)}</div>
+            </div>
+          , <div>
+              <div>{t`Forger`}</div>
+              <div className="mono">{linkToAddr(b.forger_address)}</div>
+            </div>
+        ] }
+
         { /* advanced details */ }
         { openBlock == b.id && [
 
@@ -88,8 +100,53 @@ export default ({ t, block: b, blockStatus: status, blockTxs, openTx, spends, op
               <div className="mono">{b.merkle_root}</div>
             </div>
 
+          /* PoCX consensus fields */
+          , b.base_target ? [
+              <div>
+                <div>{t`Base Target`}</div>
+                <div className="mono">{formatNumber(b.base_target)}</div>
+              </div>
+            , <div>
+                <div>{t`Generation Signature`}</div>
+                <div className="mono">{b.generation_signature}</div>
+              </div>
+            ]
+          : null
+
+          /* PoCX proof details */
+          , b.pocx_proof ? [
+              <div>
+                <div>{t`Account ID (hex)`}</div>
+                <div className="mono">{b.pocx_proof.account_id}</div>
+              </div>
+            , <div>
+                <div>{t`PoCX Seed`}</div>
+                <div className="mono">{b.pocx_proof.seed}</div>
+              </div>
+            , <div>
+                <div>{t`PoCX Nonce`}</div>
+                <div className="mono">{formatNumber(b.pocx_proof.nonce)}</div>
+              </div>
+            , <div>
+                <div>{t`PoCX Quality`}</div>
+                <div className="mono">{formatNumber(b.pocx_proof.quality)}</div>
+              </div>
+            , <div>
+                <div>{t`PoCX Compression`}</div>
+                <div className="mono">{b.pocx_proof.compression}</div>
+              </div>
+            , <div>
+                <div>{t`Public Key (hex)`}</div>
+                <div className="mono">{b.public_key}</div>
+              </div>
+            , <div>
+                <div>{t`Signature`}</div>
+                <div className="mono">{b.signature}</div>
+              </div>
+            ]
+
           /* PoW chains */
-          , b.bits ? [
+          : b.bits ? [
               <div>
                 <div>{t`Bits`}</div>
                 <div className="mono">{formatHex(b.bits)}</div>
