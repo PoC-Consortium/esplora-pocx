@@ -1,0 +1,658 @@
+/* Bitcoin PoCX Flavor - Custom Styling to match webpage */
+/* Color Palette from Bitcoin PoCX webpage:
+   - Primary Orange: #ED7D31
+   - Dark Gray Text: #5C5C69
+   - Dark Background: #2d2d2d
+   - Pure Black: #000000
+   - Pure White: #ffffff
+*/
+
+/* Import Google Fonts matching the webpage */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Override body font to match webpage */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff;
+}
+
+body.theme-dark {
+  background-color: #1a1a1a;
+}
+
+/* Headings use Noto Sans */
+h1, h2, h3, h4, h5, h6,
+.font-h1, .font-h2, .font-h3, .font-h4, .font-h5, .font-h6 {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/* Orange accent color for links and highlights */
+a, a:link, a:visited {
+  color: #ED7D31;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: #d66d21;
+}
+
+.highlighted-text {
+  color: #ED7D31 !important;
+  font-weight: 700 !important;
+}
+
+/* Dark header matching webpage - full width */
+/* Apply dark background to full-width wrapper, not the container */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #3d3d3d;
+  z-index: 0;
+}
+
+nav {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-container {
+  background-color: transparent;
+  border-bottom: none;
+  padding: 15px 0;
+}
+
+/* Logo customization */
+.navbar-brand::before {
+  background: url(img/bitcoin-pocx_logo.png);
+  background-size: contain;
+  width: 512px;
+  height: 36px;
+  background-repeat: no-repeat;
+}
+
+/* Responsive logo sizing */
+@media (max-width: 768px) {
+  .navbar-brand::before {
+    width: 350px;
+    background-position: center;
+  }
+}
+
+/* Light theme overrides to match webpage's light aesthetic */
+.theme-light::before {
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.theme-light {
+  background-color: #ffffff;
+  color: #5C5C69;
+}
+
+.theme-light a, .theme-light a:link, .theme-light a:visited {
+  color: #ED7D31;
+  font-weight: 700;
+}
+
+.theme-light a:hover, .theme-light a:focus {
+  color: #d66d21;
+}
+
+/* Buttons with orange accent */
+.btn-primary, .primary-btn {
+  background-color: #ED7D31;
+  border-color: #ED7D31;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.btn-primary:hover, .primary-btn:hover,
+.btn-primary:focus, .primary-btn:focus {
+  background-color: transparent;
+  border-color: #ED7D31;
+  color: #ED7D31;
+}
+
+.theme-light .btn-primary,
+.theme-light .primary-btn {
+  background-color: #ED7D31;
+  border-color: #ED7D31;
+  color: #ffffff;
+}
+
+.theme-light .btn-primary:hover,
+.theme-light .primary-btn:hover,
+.theme-light .btn-primary:focus,
+.theme-light .primary-btn:focus {
+  background-color: transparent;
+  border-color: #ED7D31;
+  color: #ED7D31;
+}
+
+/* Footer styling matching webpage - full width dark background */
+/* Use wrapper div for full-width background */
+.explorer-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 216px;
+  background-color: #2d2d2d;
+  border-top: 1px solid #3d3d3d;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.explorer-container {
+  position: relative;
+}
+
+footer.footer,
+.footer,
+.explorer-container > .footer,
+body .explorer-container > .footer,
+.theme-light footer.footer,
+.theme-light .footer,
+.theme-light .explorer-container > .footer,
+body.theme-light .explorer-container > .footer,
+body.theme-light footer.footer {
+  position: relative;
+  z-index: 1;
+  background-color: transparent !important;
+  background: transparent !important;
+  border-top: none !important;
+  color: #ffffff !important;
+}
+
+.theme-light .footer a,
+.theme-light .footer a:link,
+.theme-light .footer a:visited,
+.footer a,
+.footer a:link,
+.footer a:visited {
+  color: #ED7D31 !important;
+  font-weight: 700 !important;
+}
+
+.footer *,
+.theme-light .footer *,
+footer.footer *,
+body.theme-light footer.footer * {
+  position: relative;
+  z-index: 1;
+  color: #ffffff !important;
+}
+
+/* Exception: language selector and its options should have black text */
+.footer select.language-selector,
+.footer select.language-selector *,
+.footer .language-selector,
+.footer .language-selector *,
+.theme-light .footer select.language-selector,
+.theme-light .footer select.language-selector *,
+.theme-light .footer .language-selector,
+.theme-light .footer .language-selector *,
+footer.footer select.language-selector,
+footer.footer select.language-selector *,
+body.theme-light footer.footer select.language-selector,
+body.theme-light footer.footer select.language-selector * {
+  color: #000000 !important;
+}
+
+.theme-light .footer a *,
+.footer a *,
+footer.footer a *,
+body.theme-light footer.footer a * {
+  color: #ED7D31 !important;
+}
+
+.theme-light .footer div,
+.theme-light .footer span,
+footer.footer div,
+footer.footer span {
+  color: #ffffff !important;
+}
+
+/* Make footer icons/images white (GitHub, social icons) */
+.theme-light .footer img,
+.theme-light .footer_container_content_row_social-media_item,
+footer.footer img {
+  filter: brightness(0) invert(1) !important;
+  border: none !important;
+}
+
+/* Footer layout: single row with all elements using grid */
+.footer_container_content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 0;
+}
+
+/* Put language and social row in same grid cell */
+.footer .language {
+  grid-row: 1;
+  grid-column: 1;
+  justify-self: end;
+  align-self: flex-end;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 8px;
+  z-index: 10;
+  pointer-events: auto;
+  position: relative;
+}
+
+.footer .language form,
+.footer .language select {
+  pointer-events: auto;
+}
+
+.footer_container_content_row {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #3d3d3d;
+  margin-bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.footer_container_content_row > * {
+  pointer-events: auto;
+}
+
+.footer_container_content_row_social-media_container {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+  border: none !important;
+}
+
+.footer_container_content_row_social-media_container a {
+  pointer-events: auto;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.footer_container_content_row_social-media_container img {
+  pointer-events: auto;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove all possible borders from footer social media links */
+.footer_container_content_row_social-media_link {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.footer_container_content_row_social-media_item {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Copyright in second row */
+.footer_container_content_copyright {
+  grid-row: 2;
+  grid-column: 1;
+  margin-top: 20px;
+}
+
+/* Language selector styling - visible borders and black text */
+.language-selector,
+.theme-light .language-selector {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #ddd !important;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  height: auto;
+  line-height: 1.2;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+  appearance: menulist;
+}
+
+.language-selector option,
+.theme-light .language-selector option {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Override the white text on white background issue */
+.theme-light .footer select.language-selector,
+.theme-light .footer .language-selector,
+footer.footer select.language-selector {
+  color: #000000 !important;
+}
+
+.language-submit,
+.theme-light .language-submit {
+  background-color: #ED7D31 !important;
+  color: #ffffff !important;
+  border: 1px solid #ED7D31 !important;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.language-submit:hover,
+.theme-light .language-submit:hover {
+  background-color: #d66d21 !important;
+  border-color: #d66d21 !important;
+}
+
+/* Tables and blocks with subtle shadows */
+.blocks-table, .transactions-table, .stats-table, .assets-table {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.theme-light .blocks-table,
+.theme-light .transactions-table,
+.theme-light .stats-table,
+.theme-light .assets-table {
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Hover states with orange accent */
+.theme-light .blocks-table .blocks-table-row.block-data:not(.loading):hover,
+.theme-light .transactions-table .transactions-table-row.transaction-data:not(.loading):hover,
+.theme-light .assets-table .assets-table-row.asset-data:not(.loading):hover {
+  background-color: rgba(237, 125, 49, 0.05);
+  border-left: 3px solid #ED7D31;
+}
+
+/* Search bar styling */
+.search-bar {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar:hover,
+.search-bar:focus-within {
+  border-color: #ED7D31;
+}
+
+.theme-light .search-bar {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+.theme-light .search-bar-input,
+.theme-light .search-bar-input:focus {
+  color: #5C5C69;
+}
+
+/* Navigation links */
+.main-nav li a,
+.nav-link {
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.main-nav li a:hover,
+.nav-link:hover {
+  color: #ED7D31;
+}
+
+/* Pagination with orange accent */
+.pagination .pagelink {
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.pagination .pagelink:hover {
+  border-color: #ED7D31;
+  color: #ED7D31;
+}
+
+.theme-light .pagination .numbers .current {
+  border: 2px solid #ED7D31;
+  background-color: rgba(237, 125, 49, 0.1);
+}
+
+.theme-light .pagination .control a {
+  color: #ED7D31;
+}
+
+/* Transaction boxes */
+.transaction-box {
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.theme-light .transaction-box {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+/* Stats highlighting */
+.stats-table .highlighted-text {
+  color: #ED7D31 !important;
+  font-weight: 500;
+}
+
+/* Container max-width matching webpage */
+.container {
+  max-width: 1140px;
+}
+
+/* Smooth transitions throughout */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Previous/Next block buttons */
+.prev-next-blocks-btns > div a {
+  color: #ED7D31;
+  transition: all 0.3s ease;
+}
+
+.prev-next-blocks-btns > div a:hover {
+  color: #d66d21;
+}
+
+.theme-light .prev-next-blocks-btns > div a > div {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.theme-light .prev-next-blocks-btns > div a > div:hover {
+  border-color: #ED7D31;
+  box-shadow: 0 4px 12px rgba(237, 125, 49, 0.15);
+}
+
+/* Replace all #ffbb00 (yellow) with brand orange */
+[style*="#ffbb00"],
+[style*="#FFBB00"] {
+  background-color: #ED7D31 !important;
+  border-color: #ED7D31 !important;
+}
+
+.details-btn > div {
+  background-color: #ED7D31 !important;
+  color: #ffffff !important;
+}
+
+.details-btn > div > *,
+.details-btn > div > * > *,
+.details-btn .plus,
+.details-btn .minus {
+  color: #ffffff !important;
+}
+
+.details-btn .plus::before,
+.details-btn .minus::before {
+  filter: brightness(0) invert(1);
+}
+
+*[style*="border: 1px solid #ffbb00"],
+*[style*="border: 1px solid #FFBB00"] {
+  border: 1px solid #ED7D31 !important;
+}
+
+*[style*="border-bottom: solid 2px #ffbb00"],
+*[style*="border-bottom: solid 2px #FFBB00"] {
+  border-bottom: solid 2px #ED7D31 !important;
+}
+
+/* Sub-nav active tab - use dark grey instead of yellow */
+.sub-nav .active,
+.sub-navbar .active {
+  border-bottom: solid 2px #7F7F7F !important;
+}
+
+/* Replace all blue #1187C1 with brand orange - comprehensive override */
+*[style*="#1187C1"],
+*[style*="#1187c1"],
+*[style*="color: #1187C1"],
+*[style*="color:#1187C1"],
+*[style*="border-color: #1187C1"],
+*[style*="border-color:#1187C1"] {
+  color: #ED7D31 !important;
+  border-color: #ED7D31 !important;
+}
+
+/* Override all light theme blue colors */
+.theme-light a:not(.navbar-brand):not(.footer_container_content_row_social-media_link) {
+  color: #ED7D31 !important;
+  font-weight: 700;
+}
+
+/* Blocks table - replace blue with orange */
+.theme-light .blocks-table a,
+.theme-light .blocks-table-row a,
+.theme-light .transactions-table a,
+.theme-light .transactions-table-row a,
+.theme-light .highlighted-text {
+  color: #ED7D31 !important;
+  font-weight: 700;
+}
+
+/* Dashboard blocks list */
+.theme-light .blocks-table .blocks-table-row a,
+.theme-light .blocks-table .blocks-table-row .highlighted-text {
+  color: #ED7D31 !important;
+}
+
+/* Custom arrow icons - remove blue filter from light theme */
+.theme-light .direction-arrow,
+.theme-light .arrow-prev,
+.theme-light .arrow-next {
+  filter: none !important;
+}
+
+.theme-light .dash-container .view-more img {
+  filter: none !important;
+}
+
+.theme-light .pagination .pagelink img {
+  filter: none !important;
+}
+
+.arrow-prev {
+  background: url(img/icons/arrow_left_blu.png) !important;
+}
+
+.arrow-next {
+  background: url(img/icons/arrow_right_blu.png) !important;
+}
+
+.direction-arrow {
+  background: url(img/icons/arrow.png) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Fix vout/vin active background - remove yellowish color */
+.theme-light .vin.active,
+.theme-light .vout.active {
+  background: #ffffff !important;
+}
+
+.theme-light .pagination .numbers .current {
+  border: 2px solid #ED7D31 !important;
+  background-color: rgba(237, 125, 49, 0.1) !important;
+}
+
+.theme-light .pagination .control a {
+  color: #ED7D31 !important;
+}
+
+.theme-light .main-nav li a,
+.theme-light .sub-nav a {
+  color: rgba(21, 24, 28, 1) !important;
+}
+
+.theme-light .main-nav li a:hover,
+.theme-light .sub-nav a:hover {
+  color: #ED7D31 !important;
+}
+
+.theme-light .toggle-menu .section2 a:hover {
+  color: #ED7D31 !important;
+}
+
+.theme-light .toggle-menu .section1 .wallets-link .store-icons a:hover {
+  color: #ED7D31 !important;
+}
+
+.theme-light .nav-link:hover {
+  color: #ED7D31 !important;
+}
+
+/* Custom block and transaction icons */
+.block-header-title::before {
+  background-image: url(img/block.png) !important;
+}
+
+.transaction-header-title::before {
+  background-image: url(img/transaction.png) !important;
+}
+
+/* Dark theme optimizations */
+body.theme-dark {
+  background-color: #1a1a1a;
+}
+
+body.theme-dark a,
+body.theme-dark a:link,
+body.theme-dark a:visited {
+  color: #ED7D31;
+  font-weight: 700;
+}
+
+body.theme-dark a:hover,
+body.theme-dark a:focus {
+  color: #ff8f4d;
+}
