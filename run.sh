@@ -27,6 +27,8 @@ ELECTRS_NETWORK=${NETWORK}
 ORIGINAL_FLAVOR="$DAEMON-$NETWORK"
 DAEMON_DIR="/data/$DAEMON"
 if [ "$ORIGINAL_FLAVOR" == "pocx-testnet" ]; then
+  # Use bitcoin binaries and testnet data for pocx
+  DAEMON="bitcoin"
   DAEMON_DIR="/data/bitcoin/testnet"
   ELECTRS_NETWORK="testnet"
 elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet" ]; then
