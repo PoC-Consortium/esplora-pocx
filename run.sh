@@ -267,12 +267,15 @@ chmod +x /usr/bin/cli
 # initialize directories
 mkdir -p /data/logs /data/${DAEMON} /data/bitcoin
 
-mkdir -p /etc/service/${DAEMON}/log
-mkdir -p /data/logs/nodedaemon
-preprocess /srv/explorer/source/contrib/runits/nodedaemon.runit /etc/service/${DAEMON}/run
-cp /srv/explorer/source/contrib/runits/nodedaemon-log.runit /etc/service/${DAEMON}/log/run
-cp /srv/explorer/source/contrib/runits/nodedaemon-log-config.runit /data/logs/nodedaemon/config
-chmod +x /etc/service/${DAEMON}/run
+# Skip internal daemon setup for pocx-testnet (uses external bitcoind)
+if [ "$ORIGINAL_FLAVOR" != "pocx-testnet" ]; then
+    mkdir -p /etc/service/${DAEMON}/log
+    mkdir -p /data/logs/nodedaemon
+    preprocess /srv/explorer/source/contrib/runits/nodedaemon.runit /etc/service/${DAEMON}/run
+    cp /srv/explorer/source/contrib/runits/nodedaemon-log.runit /etc/service/${DAEMON}/log/run
+    cp /srv/explorer/source/contrib/runits/nodedaemon-log-config.runit /data/logs/nodedaemon/config
+    chmod +x /etc/service/${DAEMON}/run
+fi
 
 if [ "${NETWORK}" == "regtest" ] && [ -z "${NO_REGTEST_MINING}" ]; then
     if [ "${DAEMON}" != "liquid" ]; then
