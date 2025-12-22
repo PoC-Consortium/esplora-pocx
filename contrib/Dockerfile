@@ -53,7 +53,9 @@ RUN source /root/.nvm/nvm.sh \
  && DEST=/srv/explorer/static/liquid-testnet-blockstream \
     npm run dist -- liquid-testnet blockstream \
  && DEST=/srv/explorer/static/liquid-regtest-blockstream \
-    npm run dist -- liquid-regtest blockstream
+    npm run dist -- liquid-regtest blockstream \
+ && DEST=/srv/explorer/static/pocx-testnet \
+    npm run dist -- pocx-testnet
 
 # symlink the libwally wasm files into liquid's www directories (for client-side unblinding)
 RUN for dir in /srv/explorer/static/liquid*; do ln -s /srv/wally_wasm $dir/libwally; done

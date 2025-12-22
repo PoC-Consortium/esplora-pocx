@@ -10,7 +10,7 @@ SYNC_SOURCE=$5
 NGINX_GCLB_IP=${NGINX_GCLB_IP:-34.36.36.12} # bs.info
 
 if [ -z "$FLAVOR" ] || [ ! -d /srv/explorer/static/$FLAVOR ]; then
-    echo "Please provide bitcoin-mainnet, bitcoin-testnet, bitcoin-testnet4, bitcoin-signet, bitcoin-regtest, liquid-mainnet, liquid-testnet or liquid-regtest as a parameter"
+    echo "Please provide bitcoin-mainnet, bitcoin-testnet, bitcoin-testnet4, bitcoin-signet, bitcoin-regtest, liquid-mainnet, liquid-testnet, liquid-regtest or pocx-testnet as a parameter"
     echo "For example run.sh bitcoin-mainnet explorer"
     exit 1
 fi
@@ -24,8 +24,12 @@ STATIC_DIR=/srv/explorer/static/$FLAVOR
 
 ELECTRS_NETWORK=${NETWORK}
 
+ORIGINAL_FLAVOR="$DAEMON-$NETWORK"
 DAEMON_DIR="/data/$DAEMON"
-if [ "$DAEMON-$NETWORK" == "bitcoin-testnet" ]; then
+if [ "$ORIGINAL_FLAVOR" == "pocx-testnet" ]; then
+  DAEMON_DIR="/data/bitcoin/testnet"
+  ELECTRS_NETWORK="testnet"
+elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet" ]; then
   DAEMON_DIR="$DAEMON_DIR/testnet"
 elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet4" ]; then
   DAEMON_DIR="$DAEMON_DIR/testnet4"
