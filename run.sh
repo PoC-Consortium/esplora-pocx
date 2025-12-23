@@ -27,10 +27,9 @@ ELECTRS_NETWORK=${NETWORK}
 ORIGINAL_FLAVOR="$DAEMON-$NETWORK"
 DAEMON_DIR="/data/$DAEMON"
 if [ "$ORIGINAL_FLAVOR" == "pocx-testnet" ]; then
-  # Use bitcoin binaries for pocx, data is mounted at testnet3 path
-  DAEMON="bitcoin"
+  # Keep DAEMON as pocx to use electrs_pocx binary
+  # Data is mounted at /data/pocx (symlinked from bitcoin/testnet)
   ELECTRS_NETWORK="testnet"
-  # DAEMON_DIR stays as /data/bitcoin, electrs appends testnet3 internally
 elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet" ]; then
   DAEMON_DIR="$DAEMON_DIR/testnet"
 elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet4" ]; then

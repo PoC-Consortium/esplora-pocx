@@ -62,7 +62,7 @@ RUN if [ "${TARGETARCH}" = "arm64" ]; then \
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain 1.75.0
 RUN source /root/.cargo/env \
- && mkdir -p /srv/explorer/electrs{,_liquid} \
+ && mkdir -p /srv/explorer/electrs{,_liquid,_pocx} \
  && git clone --no-checkout https://github.com/blockstream/electrs.git \
  && (cd electrs \
  && git checkout fee74a0450bc28f50f89d8115c8434844088d469 \
@@ -71,6 +71,12 @@ RUN source /root/.cargo/env \
  && cargo install --root /srv/explorer/electrs_liquid --locked --path . --features electrum-discovery,liquid \
     ) \
  && rm -fr electrs \
+ && git clone --no-checkout -b pocx https://github.com/PoC-Consortium/electrs-pocx.git electrs-pocx \
+ && (cd electrs-pocx \
+ && git checkout pocx \
+ && cargo install --root /srv/explorer/electrs_pocx --locked --path . --features electrum-discovery \
+    ) \
+ && rm -fr electrs-pocx \
  && strip /srv/explorer/electrs_*/bin/electrs
 
 # Install websocat v1.9.0 with none of the default features, which aren't needed (ssl, subprocess support and stdio support)
