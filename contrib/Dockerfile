@@ -1,10 +1,19 @@
 FROM blockstream/esplora-base:latest AS build
 
+# Build electrs_pocx from PoC-Consortium fork
+FROM rust:1.75-bookworm AS electrs-pocx-build
+RUN apt-get update && apt-get install -y clang cmake git
+RUN git clone --no-checkout -b pocx https://github.com/PoC-Consortium/electrs-pocx.git /electrs-pocx \
+ && cd /electrs-pocx && git checkout pocx \
+ && cargo install --root /electrs_pocx --locked --path . --features electrum-discovery \
+ && strip /electrs_pocx/bin/electrs
+
 FROM debian:bookworm-slim
 
 COPY --from=build /srv/explorer /srv/explorer
 COPY --from=build /srv/wally_wasm /srv/wally_wasm
 COPY --from=build /root/.nvm /root/.nvm
+COPY --from=electrs-pocx-build /electrs_pocx /srv/explorer/electrs_pocx
 
 RUN apt-get -yqq update \
  && apt-get -yqq upgrade \
