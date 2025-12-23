@@ -41,7 +41,7 @@ upstream electrum_websocket {
 }
 
 server {
-    listen 80;
+    listen {NGINX_PORT};
     keepalive_requests 100000;
     gzip on;
     gzip_types application/json text/plain application/xml application/javascript;

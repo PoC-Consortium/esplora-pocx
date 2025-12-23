@@ -6,6 +6,7 @@ MODE=$2
 : ${DEBUG:=$3} # can be set either via DEBUG or using the argument
 
 SYNC_SECRET=$4
+NGINX_PORT=${NGINX_PORT:-80}
 SYNC_SOURCE=$5
 NGINX_GCLB_IP=${NGINX_GCLB_IP:-34.36.36.12} # bs.info
 
@@ -159,6 +160,7 @@ function preprocess(){
        -e "s|{NGINX_REWRITE_NOJS}|$NGINX_REWRITE_NOJS|g" \
        -e "s|{FLAVOR}|$DAEMON-$NETWORK $TEMPLATE|g" \
        -e "s|{NGINX_NOSLASH_PATH}|$NGINX_NOSLASH_PATH|g" \
+       -e "s|{NGINX_PORT}|$NGINX_PORT|g" \
        -e "s|{ASSETS_GIT}|$ASSETS_GIT|g" \
        -e "s|{ASSETS_GPG}|$ASSETS_GPG|g" \
    >$out_file
