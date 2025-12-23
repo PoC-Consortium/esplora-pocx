@@ -30,6 +30,10 @@ if [ "$ORIGINAL_FLAVOR" == "pocx-testnet" ]; then
   # Keep DAEMON as pocx to use electrs_pocx binary
   # Data is mounted at /data/pocx (symlinked from bitcoin/testnet)
   ELECTRS_NETWORK="testnet"
+  # Allow connecting to external daemon via DAEMON_RPC_ADDR env var
+  if [ -n "$DAEMON_RPC_ADDR" ]; then
+    ELECTRS_ARGS="$ELECTRS_ARGS --daemon-rpc-addr $DAEMON_RPC_ADDR"
+  fi
 elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet" ]; then
   DAEMON_DIR="$DAEMON_DIR/testnet"
 elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet4" ]; then
