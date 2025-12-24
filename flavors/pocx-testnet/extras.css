@@ -372,6 +372,20 @@ footer.footer select.language-selector {
   border-radius: 4px;
 }
 
+/* Fix table header text color - dark gray for readability */
+.blocks-table .blocks-table-row.header > *,
+.transactions-table .transactions-table-row.header > *,
+.theme-light .blocks-table .blocks-table-row.header > *,
+.theme-light .transactions-table .transactions-table-row.header > * {
+  color: #5C5C69 !important;
+}
+
+/* Override for dark theme - keep white headers */
+.theme-dark .blocks-table .blocks-table-row.header > *,
+.theme-dark .transactions-table .transactions-table-row.header > * {
+  color: #ffffff !important;
+}
+
 .theme-light .blocks-table,
 .theme-light .transactions-table,
 .theme-light .stats-table,
