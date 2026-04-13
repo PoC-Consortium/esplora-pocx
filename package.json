@@ -16,6 +16,7 @@
     "browserify-middleware": "^8.1.1",
     "express": "^4.17.1",
     "glob": "^7.1.6",
+    "http-proxy-middleware": "^3.0.5",
     "morgan": "^1.10.0"
   },
   "dependencies": {

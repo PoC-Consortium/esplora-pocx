@@ -11,7 +11,7 @@ SYNC_SOURCE=$5
 NGINX_GCLB_IP=${NGINX_GCLB_IP:-34.36.36.12} # bs.info
 
 if [ -z "$FLAVOR" ] || [ ! -d /srv/explorer/static/$FLAVOR ]; then
-    echo "Please provide bitcoin-mainnet, bitcoin-testnet, bitcoin-testnet4, bitcoin-signet, bitcoin-regtest, liquid-mainnet, liquid-testnet, liquid-regtest or pocx-testnet as a parameter"
+    echo "Please provide bitcoin-mainnet, bitcoin-testnet, bitcoin-testnet4, bitcoin-signet, bitcoin-regtest, liquid-mainnet, liquid-testnet, liquid-regtest, pocx-mainnet or pocx-testnet as a parameter"
     echo "For example run.sh bitcoin-mainnet explorer"
     exit 1
 fi
@@ -25,12 +25,11 @@ STATIC_DIR=/srv/explorer/static/$FLAVOR
 
 ELECTRS_NETWORK=${NETWORK}
 
-ORIGINAL_FLAVOR="$DAEMON-$NETWORK"
 DAEMON_DIR="/data/$DAEMON"
-if [ "$ORIGINAL_FLAVOR" == "pocx-testnet" ]; then
+if [ "$DAEMON" == "pocx" ]; then
   # Keep DAEMON as pocx to use electrs_pocx binary
-  # Data is mounted at /data/pocx (symlinked from bitcoin/testnet)
-  ELECTRS_NETWORK="testnet"
+  # Uses external bitcoind — no internal daemon setup
+  ELECTRS_NETWORK="${NETWORK}"
 elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet" ]; then
   DAEMON_DIR="$DAEMON_DIR/testnet"
 elif [ "$DAEMON-$NETWORK" == "bitcoin-testnet4" ]; then
@@ -270,8 +269,8 @@ chmod +x /usr/bin/cli
 # initialize directories
 mkdir -p /data/logs /data/${DAEMON} /data/bitcoin
 
-# Skip internal daemon setup for pocx-testnet (uses external bitcoind)
-if [ "$ORIGINAL_FLAVOR" != "pocx-testnet" ]; then
+# Skip internal daemon setup for pocx (uses external bitcoind)
+if [ "$DAEMON" != "pocx" ]; then
     mkdir -p /etc/service/${DAEMON}/log
     mkdir -p /data/logs/nodedaemon
     preprocess /srv/explorer/source/contrib/runits/nodedaemon.runit /etc/service/${DAEMON}/run

@@ -63,8 +63,16 @@ RUN source /root/.nvm/nvm.sh \
     npm run dist -- liquid-testnet blockstream \
  && DEST=/srv/explorer/static/liquid-regtest-blockstream \
     npm run dist -- liquid-regtest blockstream \
+ && DEST=/srv/explorer/static/pocx-mainnet \
+    SITE_TITLE="Bitcoin PoCX Explorer" HOME_TITLE="Bitcoin PoCX Explorer" \
+    SITE_DESC="Bitcoin PoCX blockchain explorer - Proof of Capacity Extended" \
+    MENU_ACTIVE="Bitcoin PoCX" BASE_HREF="/" \
+    npm run dist -- pocx \
  && DEST=/srv/explorer/static/pocx-testnet \
-    npm run dist -- pocx-testnet
+    SITE_TITLE="Bitcoin PoCX Testnet Explorer" HOME_TITLE="Bitcoin PoCX Testnet Explorer" \
+    SITE_DESC="Bitcoin PoCX Testnet blockchain explorer - Proof of Capacity Extended" \
+    MENU_ACTIVE="Bitcoin PoCX Testnet" BASE_HREF="/testnet/" \
+    npm run dist -- pocx
 
 # symlink the libwally wasm files into liquid's www directories (for client-side unblinding)
 RUN for dir in /srv/explorer/static/liquid*; do ln -s /srv/wally_wasm $dir/libwally; done
